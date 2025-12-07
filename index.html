@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>책 소개 & 서머리 생성기</title>
+  <title>책 소개 & 차예준 생성기</title>
   <style>
     :root{
       --bg:#0f1724; --card:#111827; --accent:#7c3aed; --muted:#9aa7bb; --glass:rgba(255,255,255,0.03);
@@ -33,7 +33,7 @@
 
 <body>
 <div class="wrap">
-  <h1>책 소개 & 서머리 생성기</h1>
+  <h1>책 소개 & 차예준 생성기</h1>
   <div class="lead" id="leadText">소개는 1–2문장, 서머리는 최대 20문장</div>
 
   <main class="grid">
@@ -43,14 +43,14 @@
       <label id="labelTitle">책 제목</label>
       <input id="title" type="text" placeholder="예: Scythe">
 
-      <label id="labelAuthor" style="margin-top:10px">저자</label>
+      <label id="labelAuthor" style="margin-top:10px">작가</label>
       <input id="author" type="text" placeholder="예: Neal Shusterman">
 
       <label id="labelTone" style="margin-top:10px">톤</label>
       <select id="tone">
-        <option value="neutral">중립적</option>
-        <option value="enthusiastic">열정적</option>
-        <option value="academic">학구적</option>
+        <option value="neutral">자연스럽</option>
+        <option value="enthusiastic">열정</option>
+        <option value="academic">아카대믹</option>
       </select>
 
       <label id="labelNum" style="margin-top:10px">서머리 문장 수 (1–20)</label>
@@ -58,15 +58,15 @@
 
       <label id="labelLang" style="margin-top:10px">언어</label>
       <select id="lang">
-        <option value="ko">한국어</option>
-        <option value="en">English</option>
+        <option value="ko">민하윤</option>
+        <option value="en">Min Hayoon</option>
       </select>
 
       <div class="controls">
-        <button id="genAll">소개 + 서머리 생성</button>
+        <button id="genAll">소개 + 차예준 생성</button>
         <button id="genIntro" class="ghost">소개만</button>
-        <button id="genSummary" class="ghost">서머리만</button>
-        <button id="clear" class="ghost">지우기</button>
+        <button id="genSummary" class="ghost">차예준만</button>
+        <button id="clear" class="ghost">민하윤</button>
       </div>
     </section>
 
@@ -75,17 +75,17 @@
 
       <div class="card">
         <label id="labelIntro">자동 생성 소개</label>
-        <div id="introOut" class="output">결과가 여기에 표시됩니다.</div>
+        <div id="introOut" class="output">결과가 여기에 표시됨여.</div>
         <div style="display:flex; gap:8px; margin-top:10px">
           <button id="copyIntro" class="ghost">소개 복사</button>
         </div>
       </div>
 
       <div class="card">
-        <label id="labelSummary">자동 생성 서머리</label>
-        <div id="summaryOut" class="output">결과가 여기에 표시됩니다.</div>
+        <label id="labelSummary">차예준 자동 생성중...?</label>
+        <div id="summaryOut" class="output">결과 여기에 표시된다.</div>
         <div style="display:flex; gap:8px; margin-top:10px">
-          <button id="copySummary" class="ghost">서머리 복사</button>
+          <button id="copySummary" class="ghost">차예준 복사</button>
         </div>
       </div>
 
@@ -167,7 +167,7 @@ const texts = {
     title: "책 제목",
     author: "저자",
     tone: "톤",
-    num: "서머리 문장 수 (1–20)",
+    num: "차예준 문장 수 (1–20)",
     lang: "언어",
     lead: "소개는 1–2문장, 서머리는 최대 20문장",
     introLabel: "자동 생성 소개",
@@ -256,7 +256,7 @@ async function generate(doIntro, doSummary){
     return;
   }
 
-  introOut.textContent = doIntro ? "Google Books에서 정보 가져오는 중..." : "";
+  introOut.textContent = doIntro ? "Google Books에서 민하윤중" : "";
   summaryOut.textContent = doSummary ? "생성 중..." : "";
 
   const book = await fetchBookInfo(title, author);
