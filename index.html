@@ -1,38 +1,42 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <title>책 소개 + 요약 생성기</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>책 소개 & 요약 생성기</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-    <h1>📘 책 소개 & 요약 생성기</h1>
+    <h1>책 소개 & 요약 생성기</h1>
 
     <div class="input-group">
         <label>책 제목:</label>
-        <input id="titleInput" type="text" placeholder="예: Scythe">
+        <input id="titleInput" type="text" placeholder="예: Scythe" />
     </div>
 
     <div class="input-group">
-        <label>저자:</label>
-        <input id="authorInput" type="text" placeholder="예: Neal Shusterman">
+        <label>작가:</label>
+        <input id="authorInput" type="text" placeholder="예: Neal Shusterman" />
     </div>
 
     <div class="input-group">
         <label>언어 선택:</label>
         <select id="langSelect">
-            <option value="ko">한국어</option>
+            <option value="ko">한를</option>
             <option value="en">English</option>
+            <option value="ja">日本語</option>
+            <option value="zh">中文</option>
         </select>
     </div>
 
-    <button onclick="generate()">소개 + 요약 생성</button>
+    <button id="generateBtn">소개 + 서머리 생성</button>
 
     <h2>자동 생성 소개</h2>
-    <div id="introBox">결과가 여기에 표시됩니다.</div>
+    <div id="introBox" class="output-box">결과 여기에 표시.</div>
 
     <h2>자동 생성 요약</h2>
-    <div id="summaryBox">결과가 여기에 표시됩니다.</div>
+    <div id="summaryBox" class="output-box">결과 여기에 표시.</div>
 
     <script src="script.js"></script>
 </body>
