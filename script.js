@@ -1,58 +1,72 @@
-// API endpoints - using local server
-const API_BOOK = '/api/book';
-const API_SUMMARY = '/api/summary';
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>책 소개 & 요약 만들기</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
 
-async function generate() {
-    const title = document.getElementById('title').value.trim();
-    const author = document.getElementById('author').value.trim();
-    const lang = document.getElementById('lang').value;
-    const tone = document.getElementById('tone').value;
-    const num = document.getElementById('num').value;
+<div class="container">
 
-    if (!title) {
-        alert('책 제목을 입력해주세요.');
-        return;
-    }
+    <div class="header">
+        <img src="profile.png" alt="Profile" class="profile-img" />
+        <h1>책 소개와 요약 만들기</h1>
+    </div>
 
-    document.getElementById('intro').innerText = 'Google Books에서 불러오는 중...';
-    document.getElementById('summary').innerText = '생성 중...';
+    <div class="input-group">
+        <label for="title">책 제목</label>
+        <input type="text" id="title" placeholder="예: 해리포터" />
+    </div>
 
-    try {
-        const introRes = await fetch(API_BOOK, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ title, author })
-        });
-        const introData = await introRes.json();
+    <div class="input-group">
+        <label for="author">작가 이름</label>
+        <input type="text" id="author" placeholder="예: J.K. Rowling" />
+    </div>
 
-        const intro = introData.description || '설명이 없습니다.';
-        document.getElementById('intro').innerText = intro;
+    <div class="row">
+        <div>
+            <label for="lang">언어 선택</label>
+            <select id="lang">
+                <option value="한국어">한국어</option>
+                <option value="English">영어</option>
+                <option value="日本語">일본어</option>
+                <option value="中文">중국어</option>
+            </select>
+        </div>
+        <div>
+            <label for="tone">글 분위기 선택</label>
+            <select id="tone">
+                <option value="neutral">보통</option>
+                <option value="fun">재미있게</option>
+                <option value="serious">진지하게</option>
+                <option value="simple">쉽고 간단하게</option>
+            </select>
+        </div>
+    </div>
 
-        const sumRes = await fetch(API_SUMMARY, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                title,
-                author,
-                description: intro,
-                tone,
-                lang,
-                num
-            })
-        });
+    <div class="input-group">
+        <label for="num">요약 문장 수 (최대 20)</label>
+        <input type="number" id="num" value="10" min="1" max="20" />
+    </div>
 
-        const sumData = await sumRes.json();
-        document.getElementById('summary').innerText = sumData.summary || '서머리 생성 실패';
+    <button class="generate-btn" onclick="generate()">만들기</button>
 
-    } catch (error) {
-        document.getElementById('intro').innerText = '책 설명을 불러오는 데 실패했습니다.';
-        document.getElementById('summary').innerText = '서머리 생성 중 오류가 발생했습니다.';
-        console.error(error);
-        alert('오류가 발생했습니다. 콘솔을 확인해주세요.');
-    }
-}
+    <div class="result-section">
+        <h2>자동으로 만든 책 소개</h2>
+        <p id="intro">아직 책 정보를 가져오지 않았어요.</p>
+        <button class="copy-btn" onclick="copyText('intro')">소개 복사</button>
+    </div>
 
-function copyText(id) {
-    const text = document.getElementById(id).innerText;
-    navigator.clipboard.writeText(text).then(() => alert('복사 완료!')).catch(() => alert('복사에 실패했습니다.'));
-}
+    <div class="result-section">
+        <h2>자동으로 만든 요약</h2>
+        <p id="summary">아직 요약이 없어요.</p>
+        <button class="copy-btn" onclick="copyText('summary')">요약 복사</button>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
